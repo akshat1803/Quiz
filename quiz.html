@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+</head>
+<body>
+     <div id="wrapper">
+        <div id="quiz">
+            <div class="timer"></div>
+            <p class="question"></p>
+            <div class="option">
+                <input type="radio" name="opt" value="">
+                <span></span>
+                <input type="radio" name="opt" value="">
+                <span></span>
+                <input type="radio" name="opt" value="">
+                <span></span>
+                <input type="radio" name="opt" value="">
+                <span></span>
+            </div>
+        </div>
+     </div>
+     <script>
+        const questions=       [
+            {
+                q:"2+2",
+                a: 4,
+                op: [1,2,3,4],
+            },
+            {
+                q:"2+2-2",
+                a: 0,
+                op: [0,6,2,4],
+            },
+            {
+                q:"2+2+2-4",
+                a: 4,
+                op: [0,6,2,4],
+            },
+        ];
+        
+let quot=document.querySelector(".question")
+let spans=document.querySelectorAll("span")
+const timerpara= document.querySelector(".timer")
+let inps=document.querySelectorAll("input")
+let timer=5;
+let questionno=0;
+let useranswer=[];
+display(questionno)
+
+timerpara.innerHTML= timer;
+
+let intervaal=setInterval(()=>{
+    if(questionno === questions.length-1){
+        clearInterval(intervaal)
+    }
+    else{
+        if(timer < 1){
+            display(++questionno)
+            timer= 5
+            timerpara.innerHTML=timer;
+            answer()
+        }
+        else
+        {
+            timerpara.innerHTML= --timer;
+            
+        }
+    }
+},1000);
+
+    function display(){
+        quot.innerHTML=questions[questionno].q
+        inps.forEach((radio, index) => {
+            radio.value =questions[questionno].op[index]
+        })
+        spans.forEach((span , index)=>{
+            span.innerHTML=questions[questionno].op[index]
+        })
+    }
+    // function storeanswer(){
+    //     for(i=0,i<radio)
+    // }
+function answer(){
+    let store="";
+    // for(i=0;i<inps.length-1;i++)
+    // {
+    //     if (radio.checked) store=radio.value[i]
+    // }
+  inps.forEach((radio) =>{
+    if (radio.checked) store=radio.value
+  })
+    useranswer.push(store)
+console.log(useranswer)
+}
+
+     </script>
+</body>
+</html>
